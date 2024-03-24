@@ -57,7 +57,7 @@ class USBList(object):
 
     def _find_devices(self, dirname):
         '''Scan a directory hierarchy for names that start with "tty" or
-        "hidraw".  Return these names in a set.
+        "hidraw". Return these names in a set.
         '''
         devices = set()
         for entry in os.scandir(dirname):
@@ -214,7 +214,8 @@ class USBRead(object):
             self._parse_bytes('internal temperature', 2, 256.0, bytes, info)
             return info
 
-        if info['firmware'][:15] in ['TEMPerGold_V3.1', 'TEMPerGold_V3.3',
+        if info['firmware'][:15] in ['TEMPerGold_V3.1',
+                                     'TEMPerGold_V3.3',
                                      'TEMPerGold_V3.4']:
             info['firmware'] = info['firmware'][:15]
             self._parse_bytes('internal temperature', 2, 100.0, bytes, info)
@@ -310,8 +311,8 @@ class USBRead(object):
         return info
 
     def read(self):
-        '''Read the firmware version, temperature, and humidity from the
-        device and return a dictionary containing these data.
+        '''Read the firmware version, temperature, and humidity from the device
+        and return a dictionary containing these data.
         '''
         # Use the last device found
         if self.device.startswith('hidraw'):
@@ -417,7 +418,7 @@ class Temper(object):
 
     def print(self, results, use_json=False):
         '''Print out a list of all of the known USB sensor devices on the
-        system.  If 'use_json' is True, then JSON formatting will be used.
+        system. If 'use_json' is True, then JSON formatting will be used.
         '''
 
         if use_json:
@@ -450,8 +451,7 @@ class Temper(object):
         parser.add_argument('--json', action='store_true',
                             help='Provide output as JSON')
         parser.add_argument('--force', type=str,
-                            help='Force the use of the hex id; ignore other'+
-                                 ' ids',
+                            help='Force the use of the hex id; ignore other ids',
                             metavar=('VENDOR_ID:PRODUCT_ID'))
         parser.add_argument('--verbose', action='store_true',
                             help='Output binary data from thermometer')
